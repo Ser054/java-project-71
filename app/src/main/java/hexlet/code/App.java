@@ -3,6 +3,7 @@ package hexlet.code;
 
 import picocli.CommandLine;
 
+
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
@@ -14,9 +15,9 @@ public final class App implements Callable<Integer> {
             description = "output format [default: stylish]")
     private String format;
     @CommandLine.Parameters(index = "0", description = "path to first file")
-    private String filepath1;
+    private String filePath1;
     @CommandLine.Parameters(index = "1", description = "path to second file")
-    private String filepath2;
+    private String filePath2;
 
     public String getGreeting() {
         return "Hello World!";
@@ -34,7 +35,12 @@ public final class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        System.out.println("Command + " + format + " " + filepath1 + " " + filepath2);
+        try {
+            System.out.println("Command: " + format + " " + filePath1 + " " + filePath2);
+            Differ.generate(filePath1, filePath2);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
         return 1;
     }
 }
