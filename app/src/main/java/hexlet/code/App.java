@@ -37,7 +37,7 @@ public final class App implements Callable<Integer> {
     public Integer call() throws Exception {
         try {
             System.out.println("Command: " + format + " " + filePath1 + " " + filePath2);
-            Differ.generate(filePath1, filePath2);
+            System.out.println(Differ.generate(filePath1, filePath2));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

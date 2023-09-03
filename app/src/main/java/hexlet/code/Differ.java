@@ -64,7 +64,6 @@ public class Differ {
             }
         }
         sbDiffer.append("}");
-        System.out.println(sbDiffer.toString());
         return sbDiffer.toString();
     }
 }
