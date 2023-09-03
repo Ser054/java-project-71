@@ -11,19 +11,58 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AppTest {
+    private String currentAbsolutePath;
+    public void init() {
+        currentAbsolutePath = new File(".").getAbsolutePath();
+    }
 
     @Test
     void getDiffIdenticalFiles() throws IOException {
+        init();
         Differ classUnderTest = new Differ();
-        String absolutePath = new File(".").getAbsolutePath();
-        absolutePath = absolutePath.substring(0, absolutePath.length() - 1);
-        String pathToFile1 = absolutePath + "/src/main/resources/json1";
+        currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1";
         assertNotNull(Differ.generate(pathToFile1, pathToFile1),
                 "{\n"
                         + "    follow: false\n"
                         + "    host: hexlet.io\n"
                         + "    proxy: 123.234.53.22\n"
                         + "    timeout: 50\n"
+                        + "}\n");
+    }
+
+    @Test
+    void getDiffAddInSecondFile() throws IOException {
+        init();
+        Differ classUnderTest = new Differ();
+        currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1";
+        String pathToFile2 = currentAbsolutePath + "/src/main/resources/json3";
+        assertNotNull(Differ.generate(pathToFile1, pathToFile2),
+                "{\n"
+                        + "    follow: false"
+                        + "    host: hexlet.io"
+                        + "    proxy: 123.234.53.22"
+                        + "    timeout: 50"
+                        + "  + verbose: true"
+                        + "}\n");
+    }
+
+    @Test
+    void getDiffOnAllDiff() throws IOException {
+        init();
+        Differ classUnderTest = new Differ();
+        currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1";
+        String pathToFile2 = currentAbsolutePath + "/src/main/resources/json2";
+        assertNotNull(Differ.generate(pathToFile1, pathToFile2),
+                "{\n"
+                        + "  - follow: false\n"
+                        + "    host: hexlet.io\n"
+                        + "  - proxy: 123.234.53.22\n"
+                        + "  - timeout: 50\n"
+                        + "  + timeout: 20\n"
+                        + "  + verbose: true\n"
                         + "}\n");
     }
 }
