@@ -4,11 +4,26 @@
 package hexlet.code;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.File;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+
+    @Test
+    void getDiffIdenticalFiles() throws IOException {
+        Differ classUnderTest = new Differ();
+        String absolutePath = new File(".").getAbsolutePath();
+        absolutePath = absolutePath.substring(0, absolutePath.length() - 1);
+        String pathToFile1 = absolutePath + "/src/main/resources/json1";
+        assertNotNull(Differ.generate(pathToFile1, pathToFile1),
+                "{\n" +
+                        "    follow: false\n" +
+                        "    host: hexlet.io\n" +
+                        "    proxy: 123.234.53.22\n" +
+                        "    timeout: 50\n" +
+                        "}\n");
     }
 }

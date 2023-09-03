@@ -11,6 +11,7 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
     id 'checkstyle'
+    id 'jacoco'
 }
 
 repositories {
@@ -38,6 +39,13 @@ testing {
             useJUnitJupiter('5.8.1')
         }
     }
+}
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
 }
 
 application {
