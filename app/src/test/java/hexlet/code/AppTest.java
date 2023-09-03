@@ -19,11 +19,11 @@ class AppTest {
         absolutePath = absolutePath.substring(0, absolutePath.length() - 1);
         String pathToFile1 = absolutePath + "/src/main/resources/json1";
         assertNotNull(Differ.generate(pathToFile1, pathToFile1),
-                "{\n" +
-                        "    follow: false\n" +
-                        "    host: hexlet.io\n" +
-                        "    proxy: 123.234.53.22\n" +
-                        "    timeout: 50\n" +
-                        "}\n");
+                "{\n"
+                        + "    follow: false\n"
+                        + "    host: hexlet.io\n"
+                        + "    proxy: 123.234.53.22\n"
+                        + "    timeout: 50\n"
+                        + "}\n");
     }
 }
