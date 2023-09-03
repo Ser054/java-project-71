@@ -17,3 +17,7 @@ jobs:
       gradle-version: 8.3
    - name: Execute Gradle build
      run: ./gradlew build
+   - name: Generate JaCoCo Badge
+     uses: cicirello/jacoco-badge-generator@v2
+     with:
+      generate-branches-badge: true
