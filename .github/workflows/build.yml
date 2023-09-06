@@ -17,8 +17,10 @@ jobs:
       gradle-version: 8.3
    - name: Execute Gradle build
      run: ./gradlew build
-   - name: Check style Main Test
-     run: make test
+   - name: Check style linter in Main and Test
+     run: make lint
+   - name: Start Test
+     run: ./gradlew test
    - name: Generate JaCoCo Badge
      uses: cicirello/jacoco-badge-generator@v2
      with:
