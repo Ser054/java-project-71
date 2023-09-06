@@ -24,11 +24,11 @@ jobs:
      with:
       generate-branches-badge: true
       jacoco-csv-file: app/build/reports/jacoco/test/jacocoTestReport.csv
-     #   - name: Publish code coverage
-     #     uses: paambaati/codeclimate-action@v3.0.0
-     #     env:
-     #      CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-     #      JACOCO_SOURCE_PATH: app/src/main/java
-     #     with:
-     #      coverageCommand: make report
-     #      coverageLocation: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+   - name: Publish code coverage
+     uses: paambaati/codeclimate-action@v3.0.0
+     env:
+      CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+      JACOCO_SOURCE_PATH: app/src/main/java
+     with:
+      coverageCommand: make report
+      coverageLocations: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
