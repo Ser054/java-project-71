@@ -19,8 +19,6 @@ jobs:
      run: ./gradlew build
    - name: Check style linter in Main and Test
      run: make lint
-   - name: Start Test
-     run: ./gradlew test
    - name: Generate JaCoCo Badge
      uses: cicirello/jacoco-badge-generator@v2
      with:

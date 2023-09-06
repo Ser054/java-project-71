@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AppTest {
     private String currentAbsolutePath;
@@ -22,13 +22,13 @@ class AppTest {
         Differ classUnderTest = new Differ();
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
         String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1";
-        assertNotNull(Differ.generate(pathToFile1, pathToFile1),
+        assertEquals(Differ.generate(pathToFile1, pathToFile1),
                 "{\n"
                         + "    follow: false\n"
                         + "    host: hexlet.io\n"
                         + "    proxy: 123.234.53.22\n"
                         + "    timeout: 50\n"
-                        + "}\n");
+                        + "}");
     }
 
     @Test
@@ -38,14 +38,14 @@ class AppTest {
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
         String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1";
         String pathToFile2 = currentAbsolutePath + "/src/main/resources/json3";
-        assertNotNull(Differ.generate(pathToFile1, pathToFile2),
+        assertEquals(Differ.generate(pathToFile1, pathToFile2),
                 "{\n"
-                        + "    follow: false"
-                        + "    host: hexlet.io"
-                        + "    proxy: 123.234.53.22"
-                        + "    timeout: 50"
-                        + "  + verbose: true"
-                        + "}\n");
+                        + "    follow: false\n"
+                        + "    host: hexlet.io\n"
+                        + "    proxy: 123.234.53.22\n"
+                        + "    timeout: 50\n"
+                        + "  + verbose: true\n"
+                        + "}");
     }
 
     @Test
@@ -55,7 +55,7 @@ class AppTest {
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
         String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1";
         String pathToFile2 = currentAbsolutePath + "/src/main/resources/json2";
-        assertNotNull(Differ.generate(pathToFile1, pathToFile2),
+        assertEquals(Differ.generate(pathToFile1, pathToFile2),
                 "{\n"
                         + "  - follow: false\n"
                         + "    host: hexlet.io\n"
@@ -63,6 +63,6 @@ class AppTest {
                         + "  - timeout: 50\n"
                         + "  + timeout: 20\n"
                         + "  + verbose: true\n"
-                        + "}\n");
+                        + "}");
     }
 }
