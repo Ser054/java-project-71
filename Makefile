@@ -12,6 +12,7 @@ test:
 
 lint:
 	./gradlew checkstyleMain
+	./gradlew checkstyleTest
 
 build:
 	./gradlew build
