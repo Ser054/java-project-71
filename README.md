@@ -5,3 +5,6 @@
 
 ### Шаг 5, ролик (Сравнение плоских файлов (JSON)):
 https://asciinema.org/a/WufIhie2DqQe7bx6Vd69qm9EC
+
+### Шаг 7, ролик (Сравнение плоских файлов (YAML)):
+https://asciinema.org/a/3UT83o0yEs0sFrsl5NKqGR91C
