@@ -1,8 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,20 +19,30 @@ public class Differ {
         return data;
     }
 
-    public static Map<String, String> getMapParamValueFromJsonString(String contentFile) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, String> mapParameterValue =
-                objectMapper.readValue(contentFile, new TypeReference<Map<String, String>>() { });
-        return mapParameterValue;
-    }
+    public static String generate(String filePath1, String filePath2) throws Exception {
+        int startIndexExtensF1 = filePath1.indexOf('.');
+        String extensionF1 = startIndexExtensF1 == -1 ? null : filePath1.substring(startIndexExtensF1);
+        int startIndexExtensF2 = filePath1.indexOf('.');
+        String extensionF2 = startIndexExtensF2 == -1 ? null : filePath2.substring(startIndexExtensF2);
 
-    public static String generate(String filePath1, String filePath2) throws IOException {
+        if (!extensionF1.equals(extensionF2) || !(extensionF1.equals(".yaml") || extensionF1.equals(".json"))) {
+            throw new Exception("Incorrect file extensions were entered.");
+        }
+
         String contentFile1 = getStringFromFile(filePath1);
         String contentFile2 = getStringFromFile(filePath2);
 
-        Map<String, String> mapParameterValueFile1 = getMapParamValueFromJsonString(contentFile1);
-        Map<String, String> mapParameterValueFile2 = getMapParamValueFromJsonString(contentFile2);
-
+        Map<String, String> mapParameterValueFile1;
+        Map<String, String> mapParameterValueFile2;
+        if (extensionF1.equals(".yaml")) {
+            mapParameterValueFile1 = Parser.getMapParamValueFromYamlString(contentFile1);
+            mapParameterValueFile2 = Parser.getMapParamValueFromYamlString(contentFile2);
+        } else if (extensionF1.equals(".json")) {
+            mapParameterValueFile1 = Parser.getMapParamValueFromJsonString(contentFile1);
+            mapParameterValueFile2 = Parser.getMapParamValueFromJsonString(contentFile2);
+        } else {
+            throw new Exception("Incorrect data was entered.");
+        }
         Map<String, String> treeMapAllParamValue = new TreeMap<String, String>();
         treeMapAllParamValue.putAll(mapParameterValueFile1);
         treeMapAllParamValue.putAll(mapParameterValueFile2);

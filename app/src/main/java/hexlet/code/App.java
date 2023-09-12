@@ -39,7 +39,7 @@ public final class App implements Callable<Integer> {
             System.out.println("Command: " + format + " " + filePath1 + " " + filePath2);
             System.out.println(Differ.generate(filePath1, filePath2));
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Error!\n" + ex.getMessage());
         }
         return 1;
     }

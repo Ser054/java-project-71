@@ -17,11 +17,11 @@ class AppTest {
     }
 
     @Test
-    void getDiffIdenticalFiles() throws IOException {
+    void getDiffIdenticalFilesJson() throws IOException, Exception {
         init();
         Differ classUnderTest = new Differ();
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
-        String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1";
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1.json";
         assertEquals(Differ.generate(pathToFile1, pathToFile1),
                 "{\n"
                         + "    follow: false\n"
@@ -32,12 +32,12 @@ class AppTest {
     }
 
     @Test
-    void getDiffAddInSecondFile() throws IOException {
+    void getDiffAddInSecondFileJson() throws IOException, Exception {
         init();
         Differ classUnderTest = new Differ();
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
-        String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1";
-        String pathToFile2 = currentAbsolutePath + "/src/main/resources/json3";
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1.json";
+        String pathToFile2 = currentAbsolutePath + "/src/main/resources/json3.json";
         assertEquals(Differ.generate(pathToFile1, pathToFile2),
                 "{\n"
                         + "    follow: false\n"
@@ -49,12 +49,12 @@ class AppTest {
     }
 
     @Test
-    void getDiffOnAllDiff() throws IOException {
+    void getDiffOnAllDiffJson() throws IOException, Exception {
         init();
         Differ classUnderTest = new Differ();
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
-        String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1";
-        String pathToFile2 = currentAbsolutePath + "/src/main/resources/json2";
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1.json";
+        String pathToFile2 = currentAbsolutePath + "/src/main/resources/json2.json";
         assertEquals(Differ.generate(pathToFile1, pathToFile2),
                 "{\n"
                         + "  - follow: false\n"
@@ -64,5 +64,36 @@ class AppTest {
                         + "  + timeout: 20\n"
                         + "  + verbose: true\n"
                         + "}");
+    }
+
+    @Test
+    void getDiffOnAllDiffYaml() throws IOException, Exception {
+        init();
+        currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/yaml1.yaml";
+        String pathToFile2 = currentAbsolutePath + "/src/main/resources/yaml2.yaml";
+        assertEquals(Differ.generate(pathToFile1, pathToFile2),
+                "{\n"
+                        + "  - author: Charles R. Saunders\n"
+                        + "  - language: English\n"
+                        + "  + language: Russia\n"
+                        + "  - pages: 224\n"
+                        + "  + pages: 300\n"
+                        + "    publication-year: 1981\n"
+                        + "}");
+    }
+
+    @Test
+    void getErrorDiffOnYamlIncorrectExtension() throws IOException, Exception {
+        init();
+        currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/yaml1.s";
+        String pathToFile2 = currentAbsolutePath + "/src/main/resources/yaml2.y";
+        try {
+            Differ.generate(pathToFile1, pathToFile2);
+        } catch (Exception ex) {
+            assertEquals(ex.getMessage(), "Incorrect file extensions were entered.");
+        }
+
     }
 }
