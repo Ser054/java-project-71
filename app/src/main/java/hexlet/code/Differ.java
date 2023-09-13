@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -32,8 +34,8 @@ public class Differ {
         String contentFile1 = getStringFromFile(filePath1);
         String contentFile2 = getStringFromFile(filePath2);
 
-        Map<String, String> mapParameterValueFile1;
-        Map<String, String> mapParameterValueFile2;
+        Map<String, Object> mapParameterValueFile1;
+        Map<String, Object> mapParameterValueFile2;
         if (extensionF1.equals(".yaml")) {
             mapParameterValueFile1 = Parser.getMapParamValueFromYamlString(contentFile1);
             mapParameterValueFile2 = Parser.getMapParamValueFromYamlString(contentFile2);
@@ -43,20 +45,20 @@ public class Differ {
         } else {
             throw new Exception("Incorrect data was entered.");
         }
-        Map<String, String> treeMapAllParamValue = new TreeMap<String, String>();
+        Map<String, Object> treeMapAllParamValue = new TreeMap<String, Object>();
         treeMapAllParamValue.putAll(mapParameterValueFile1);
         treeMapAllParamValue.putAll(mapParameterValueFile2);
 
         StringBuilder sbDiffer = new StringBuilder("{\n");
         String errorValue = "&&$Not found$??";
-        for (Map.Entry<String, String> paramValueAll: treeMapAllParamValue.entrySet()) {
-            String valueFile1 = mapParameterValueFile1.getOrDefault(paramValueAll.getKey(), errorValue);
-            String valueFile2 = mapParameterValueFile2.getOrDefault(paramValueAll.getKey(), errorValue);
+        for (Map.Entry<String, Object> paramValueAll: treeMapAllParamValue.entrySet()) {
+            Object valueFile1 = mapParameterValueFile1.getOrDefault(paramValueAll.getKey(), errorValue);
+            Object valueFile2 = mapParameterValueFile2.getOrDefault(paramValueAll.getKey(), errorValue);
             if (mapParameterValueFile1.containsKey(paramValueAll.getKey())) {
-                if (valueFile1.equals(valueFile2)) {
+                if (valueFile1 != null && valueFile2 != null && valueFile1.equals(valueFile2)) {
                     sbDiffer.append("    ").append(paramValueAll.getKey())
                             .append(": ").append(paramValueAll.getValue()).append("\n");
-                } else if (valueFile2.equals(errorValue)) {
+                } else if (valueFile2 != null && valueFile2.equals(errorValue)) {
                     sbDiffer.append("  - ").append(paramValueAll.getKey()).append(": ")
                             .append(paramValueAll.getValue()).append("\n");
                 } else {
