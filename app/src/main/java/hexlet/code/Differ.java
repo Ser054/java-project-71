@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -19,7 +21,7 @@ public class Differ {
         return data;
     }
 
-    public static String generate(String filePath1, String filePath2) throws Exception {
+    public static String generate(String filePath1, String filePath2, String action) throws Exception {
         int startIndexExtensF1 = filePath1.indexOf('.');
         String extensionF1 = startIndexExtensF1 == -1 ? null : filePath1.substring(startIndexExtensF1);
         int startIndexExtensF2 = filePath1.indexOf('.');
@@ -46,31 +48,33 @@ public class Differ {
         Map<String, Object> treeMapAllParamValue = new TreeMap<String, Object>();
         treeMapAllParamValue.putAll(mapParameterValueFile1);
         treeMapAllParamValue.putAll(mapParameterValueFile2);
+        Map<Map.Entry<String, Object>, String> mapAllParamValueAndAction
+                = new LinkedHashMap<Map.Entry<String, Object>, String>();
+        Map<String, Object> mapOldValues = new HashMap<String, Object>();
 
-        StringBuilder sbDiffer = new StringBuilder("{\n");
         String errorValue = "&&$Not found$??";
         for (Map.Entry<String, Object> paramValueAll: treeMapAllParamValue.entrySet()) {
             Object valueFile1 = mapParameterValueFile1.getOrDefault(paramValueAll.getKey(), errorValue);
             Object valueFile2 = mapParameterValueFile2.getOrDefault(paramValueAll.getKey(), errorValue);
             if (mapParameterValueFile1.containsKey(paramValueAll.getKey())) {
                 if (valueFile1 != null && valueFile2 != null && valueFile1.equals(valueFile2)) {
-                    sbDiffer.append("    ").append(paramValueAll.getKey())
-                            .append(": ").append(paramValueAll.getValue()).append("\n");
+                    mapAllParamValueAndAction.put(paramValueAll, "NoAction");
                 } else if (valueFile2 != null && valueFile2.equals(errorValue)) {
-                    sbDiffer.append("  - ").append(paramValueAll.getKey()).append(": ")
-                            .append(paramValueAll.getValue()).append("\n");
+                    mapAllParamValueAndAction.put(paramValueAll, "Del");
                 } else {
-                    sbDiffer.append("  - ").append(paramValueAll.getKey()).append(": ")
-                            .append(valueFile1).append("\n");
-                    sbDiffer.append("  + ").append(paramValueAll.getKey()).append(": ")
-                            .append(paramValueAll.getValue()).append("\n");
+                    mapOldValues.put(paramValueAll.getKey(), valueFile1);
+                    mapAllParamValueAndAction.put(paramValueAll, "Edit");
                 }
             } else {
-                sbDiffer.append("  + ").append(paramValueAll.getKey()).append(": ")
-                        .append(paramValueAll.getValue()).append("\n");
+                mapAllParamValueAndAction.put(paramValueAll, "Add");
             }
         }
-        sbDiffer.append("}");
-        return sbDiffer.toString();
+        String output = "";
+        if (action.equals("forFuture")) {
+            output = new String("For future!");
+        } else {
+            output = FormatOutput.stylish(mapAllParamValueAndAction, mapOldValues);
+        }
+        return output;
     }
 }

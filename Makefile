@@ -18,5 +18,6 @@ report:
 	./gradlew jacocoTestReport
 
 build:
+	./gradlew installDist
 	./gradlew build
 .PHONY: build
