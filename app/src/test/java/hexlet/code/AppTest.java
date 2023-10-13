@@ -129,4 +129,64 @@ class AppTest {
                         + "    xmas-fifth-day: {calling-birds=four, french-hens=3}\n"
                         + "}");
     }
+
+    @Test
+    void getDiffJsonForStylePlain() throws IOException, Exception {
+        init();
+        currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/jsonWithArray1.json";
+        String pathToFile2 = currentAbsolutePath + "/src/main/resources/jsonWithArray2.json";
+        assertEquals(Differ.generate(pathToFile1, pathToFile2, "plain"),
+                "Property 'chars1' has not been changed. Value is [complex value]\n"
+                        + "Property 'chars2' was updated. From '[complex value]' to 'false'\n"
+                        + "Property 'checked' was updated. From 'false' to 'true'\n"
+                        + "Property 'default' was updated. From 'null' to '[complex value]'\n"
+                        + "Property 'id' was updated. From '45' to 'null'\n"
+                        + "Property 'key1' was removed\n"
+                        + "Property 'key2' was added with value: 'value2'\n"
+                        + "Property 'numbers1' has not been changed. Value is [complex value]\n"
+                        + "Property 'numbers2' was updated. From '[complex value]' to '[complex value]'\n"
+                        + "Property 'numbers3' was removed\n"
+                        + "Property 'numbers4' was added with value: [complex value]\n"
+                        + "Property 'obj1' was added with value: [complex value]\n"
+                        + "Property 'setting1' was updated. From 'Some value' to 'Another value'\n"
+                        + "Property 'setting2' was updated. From '200' to '300'\n"
+                        + "Property 'setting3' was updated. From 'true' to 'none'\n");
+    }
+
+    @Test
+    void getDiffYamlForStylePlain() throws IOException, Exception {
+        init();
+        currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/yamlWithArray1.yaml";
+        String pathToFile2 = currentAbsolutePath + "/src/main/resources/yamlWithArray2.yaml";
+        assertEquals(Differ.generate(pathToFile1, pathToFile2, "plain"),
+                "Property 'calling-birds' was removed\n"
+                        + "Property 'french-hens' has not been changed. Value is '3'\n"
+                        + "Property 'pi' was removed\n"
+                        + "Property 'ray' has not been changed. Value is 'a drop of golden sun'\n"
+                        + "Property 'xmas' was updated. From 'true' to 'false'\n"
+                        + "Property 'xmas-fifth-day' has not been changed. Value is [complex value]\n");
+    }
+
+    @Test
+    void getDiffSimilarJsonForStylePlain() throws IOException, Exception {
+        init();
+        currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/jsonWithArray1.json";
+        String pathToFile2 = currentAbsolutePath + "/src/main/resources/jsonWithArray1.json";
+        assertEquals(Differ.generate(pathToFile1, pathToFile2, "plain"),
+                "Property 'chars1' has not been changed. Value is [complex value]\n"
+                        + "Property 'chars2' has not been changed. Value is [complex value]\n"
+                        + "Property 'checked' has not been changed. Value is 'false'\n"
+                        + "Property 'default' was updated. From 'null' to 'null'\n"
+                        + "Property 'id' has not been changed. Value is '45'\n"
+                        + "Property 'key1' has not been changed. Value is 'value1'\n"
+                        + "Property 'numbers1' has not been changed. Value is [complex value]\n"
+                        + "Property 'numbers2' has not been changed. Value is [complex value]\n"
+                        + "Property 'numbers3' has not been changed. Value is [complex value]\n"
+                        + "Property 'setting1' has not been changed. Value is 'Some value'\n"
+                        + "Property 'setting2' has not been changed. Value is '200'\n"
+                        + "Property 'setting3' has not been changed. Value is 'true'\n");
+    }
 }

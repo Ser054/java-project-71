@@ -70,10 +70,10 @@ public class Differ {
             }
         }
         String output = "";
-        if (action.equals("forFuture")) {
-            output = new String("For future!");
+        if (action.equals("plain")) {
+            output = Formatter.plain(mapAllParamValueAndAction, mapOldValues);
         } else {
-            output = FormatOutput.stylish(mapAllParamValueAndAction, mapOldValues);
+            output = Formatter.stylish(mapAllParamValueAndAction, mapOldValues);
         }
         return output;
     }
