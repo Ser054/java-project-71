@@ -1,8 +1,8 @@
 run-dist:
-	app/build/install/app/bin/app
+	app/build/install/app/bin/app -h
 
 setup:
-	gradle wrapper --gradle-version 8.3
+	./gradlew wrapper
 
 run:
 	./gradlew run
