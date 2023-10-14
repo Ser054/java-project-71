@@ -1,9 +1,9 @@
 package hexlet.code;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+/*import org.json.JSONException;
+import org.json.JSONObject;*/
 
-import java.util.LinkedHashMap;
+/*import java.util.LinkedHashMap;*/
 import java.util.Map;
 
 public class Formatter {
@@ -119,14 +119,14 @@ public class Formatter {
         return sbDiffer.toString();
     }
 
-    public static String json(Map<Map.Entry<String, Object>, String> dataWhatHappen) throws JSONException {
+    /*public static String json(Map<Map.Entry<String, Object>, String> dataWhatHappen) throws JSONException {
         Map<String, Object> totalMapToJson = new LinkedHashMap<String, Object>();
         for (Map.Entry<Map.Entry<String, Object>, String> paramValueAll : dataWhatHappen.entrySet()) {
             switch (paramValueAll.getValue()) {
                 case ACT_NOACTION -> totalMapToJson
                         .put(paramValueAll.getKey().getKey(), paramValueAll.getKey().getValue());
-                /*case ACT_DEL -> sbDiffer.append("  - ").append(paramValueAll.getKey().getKey()).append(": ")
-                        .append(paramValueAll.getKey().getValue()).append("\n");*/
+                *//*case ACT_DEL -> sbDiffer.append("  - ").append(paramValueAll.getKey().getKey()).append(": ")
+                        .append(paramValueAll.getKey().getValue()).append("\n");*//*
                 case ACT_ADD -> totalMapToJson.put(paramValueAll.getKey().getKey(), paramValueAll.getKey().getValue());
                 case ACT_EDIT -> totalMapToJson.put(paramValueAll.getKey().getKey(), paramValueAll.getKey().getValue());
                 default -> {
@@ -136,5 +136,5 @@ public class Formatter {
         JSONObject output = new JSONObject(totalMapToJson);
         String jsonNewLines = output.toString(SPACE_FOR_JSON);
         return jsonNewLines;
-    }
+    }*/
 }

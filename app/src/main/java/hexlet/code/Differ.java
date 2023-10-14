@@ -69,11 +69,12 @@ public class Differ {
                 mapAllParamValueAndAction.put(paramValueAll, "Add");
             }
         }
+        /*else if (action.equals("json")) {
+            output = Formatter.json(mapAllParamValueAndAction);
+        }*/
         String output = "";
         if (action.equals("plain")) {
             output = Formatter.plain(mapAllParamValueAndAction, mapOldValues);
-        } else if (action.equals("json")) {
-            output = Formatter.json(mapAllParamValueAndAction);
         } else {
             output = Formatter.stylish(mapAllParamValueAndAction, mapOldValues);
         }
