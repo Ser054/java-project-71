@@ -72,6 +72,8 @@ public class Differ {
         String output = "";
         if (action.equals("plain")) {
             output = Formatter.plain(mapAllParamValueAndAction, mapOldValues);
+        } else if (action.equals("json")) {
+            output = Formatter.json(mapAllParamValueAndAction);
         } else {
             output = Formatter.stylish(mapAllParamValueAndAction, mapOldValues);
         }

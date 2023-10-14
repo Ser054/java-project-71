@@ -36,7 +36,7 @@ public final class App implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         try {
-            if (format == null) {
+            if (format == null || !(format.toLowerCase().equals("plain") || format.toLowerCase().equals("json"))) {
                 format = "stylish";
             }
             System.out.println("Command: " + format + " " + filePath1 + " " + filePath2);

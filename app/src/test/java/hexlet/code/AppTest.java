@@ -189,4 +189,52 @@ class AppTest {
                         + "Property 'setting2' has not been changed. Value is '200'\n"
                         + "Property 'setting3' has not been changed. Value is 'true'\n");
     }
+
+    @Test
+    void getDiffStyleJSON() throws IOException, Exception {
+        init();
+        currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
+        String pathToFile1 = currentAbsolutePath + "/src/main/resources/jsonWithArray1.json";
+        String pathToFile2 = currentAbsolutePath + "/src/main/resources/jsonWithArray2.json";
+        assertEquals(Differ.generate(pathToFile1, pathToFile2, "json"),
+                "{\n"
+                        + "    \"chars1\": [\n"
+                        + "        \"a\",\n"
+                        + "        \"b\",\n"
+                        + "        \"c\"\n"
+                        + "    ],\n"
+                        + "    \"chars2\": false,\n"
+                        + "    \"checked\": true,\n"
+                        + "    \"default\": [\n"
+                        + "        \"value1\",\n"
+                        + "        \"value2\"\n"
+                        + "    ],\n"
+                        + "    \"id\": null,\n"
+                        + "    \"key2\": \"value2\",\n"
+                        + "    \"numbers1\": [\n"
+                        + "        1,\n"
+                        + "        2,\n"
+                        + "        3,\n"
+                        + "        4\n"
+                        + "    ],\n"
+                        + "    \"numbers2\": [\n"
+                        + "        22,\n"
+                        + "        33,\n"
+                        + "        44,\n"
+                        + "        55\n"
+                        + "    ],\n"
+                        + "    \"numbers4\": [\n"
+                        + "        4,\n"
+                        + "        5,\n"
+                        + "        6\n"
+                        + "    ],\n"
+                        + "    \"obj1\": {\n"
+                        + "        \"isNested\": true,\n"
+                        + "        \"nestedKey\": \"value\"\n"
+                        + "    },\n"
+                        + "    \"setting1\": \"Another value\",\n"
+                        + "    \"setting2\": 300,\n"
+                        + "    \"setting3\": \"none\"\n"
+                        + "}");
+    }
 }
