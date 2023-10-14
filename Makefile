@@ -1,9 +1,6 @@
 run-dist:
 	app/build/install/app/bin/app -h
 
-setup:
-	./gradlew wrapper
-
 run:
 	./gradlew run
 
