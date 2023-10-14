@@ -197,7 +197,7 @@ class AppTest {
         String pathToFile1 = currentAbsolutePath + "/src/main/resources/jsonWithArray1.json";
         String pathToFile2 = currentAbsolutePath + "/src/main/resources/jsonWithArray2.json";
         assertEquals(Differ.generate(pathToFile1, pathToFile2, "json"),
-                "{\n"
+                /*"{\n"
                         + "    \"chars1\": [\n"
                         + "        \"a\",\n"
                         + "        \"b\",\n"
@@ -235,6 +235,10 @@ class AppTest {
                         + "    \"setting1\": \"Another value\",\n"
                         + "    \"setting2\": 300,\n"
                         + "    \"setting3\": \"none\"\n"
-                        + "}");
+                        + "}"*/"{\"chars1\":[\"a\",\"b\",\"c\"],\"chars2\":false,\"checked\":true,\"default\":["
+                        + "\"value1\",\"value2\"],\"id\":null,\"key2\":\"value2\",\"numbers1\":[1,2,3,4],\"numbers2"
+                        + "\":[22,33,44,55],"
+                        + "\"numbers4\":[4,5,6],\"obj1\":{\"nestedKey\":\"value\",\"isNested\":true},\"setting1\":"
+                        + "\"Another value\",\"setting2\":300,\"setting3\":\"none\"}");
     }
 }
