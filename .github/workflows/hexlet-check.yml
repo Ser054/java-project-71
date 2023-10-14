@@ -17,9 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: 8.3
+
       - name: Hexlet project check
         uses: hexlet/project-action@release
         with:

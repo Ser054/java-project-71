@@ -20,7 +20,7 @@ class AppTest {
         Differ classUnderTest = new Differ();
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
         String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1.json";
-        assertEquals(Differ.generate(pathToFile1, pathToFile1, ""),
+        assertEquals(Differ.generate(pathToFile1, pathToFile1, "stylish"),
                 "{\n"
                         + "    follow: false\n"
                         + "    host: hexlet.io\n"
@@ -36,7 +36,7 @@ class AppTest {
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
         String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1.json";
         String pathToFile2 = currentAbsolutePath + "/src/main/resources/json3.json";
-        assertEquals(Differ.generate(pathToFile1, pathToFile2, ""),
+        assertEquals(Differ.generate(pathToFile1, pathToFile2, "stylish"),
                 "{\n"
                         + "    follow: false\n"
                         + "    host: hexlet.io\n"
@@ -53,7 +53,7 @@ class AppTest {
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
         String pathToFile1 = currentAbsolutePath + "/src/main/resources/json1.json";
         String pathToFile2 = currentAbsolutePath + "/src/main/resources/json2.json";
-        assertEquals(Differ.generate(pathToFile1, pathToFile2, ""),
+        assertEquals(Differ.generate(pathToFile1, pathToFile2, "stylish"),
                 "{\n"
                         + "  - follow: false\n"
                         + "    host: hexlet.io\n"
@@ -72,7 +72,7 @@ class AppTest {
         String pathToFile1 = currentAbsolutePath + "/src/main/resources/yaml1.s";
         String pathToFile2 = currentAbsolutePath + "/src/main/resources/yaml2.y";
         try {
-            Differ.generate(pathToFile1, pathToFile2, "");
+            Differ.generate(pathToFile1, pathToFile2, "stylish");
         } catch (Exception ex) {
             assertEquals(ex.getMessage(), "Incorrect file extensions were entered.");
         }
@@ -84,7 +84,7 @@ class AppTest {
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
         String pathToFile1 = currentAbsolutePath + "/src/main/resources/jsonWithArray1.json";
         String pathToFile2 = currentAbsolutePath + "/src/main/resources/jsonWithArray2.json";
-        assertEquals(Differ.generate(pathToFile1, pathToFile2, ""),
+        assertEquals(Differ.generate(pathToFile1, pathToFile2, "stylish"),
                 "{\n"
                         + "    chars1: [a, b, c]\n"
                         + "  - chars2: [d, e, f]\n"
@@ -118,7 +118,7 @@ class AppTest {
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
         String pathToFile1 = currentAbsolutePath + "/src/main/resources/yamlWithArray1.yaml";
         String pathToFile2 = currentAbsolutePath + "/src/main/resources/yamlWithArray2.yaml";
-        assertEquals(Differ.generate(pathToFile1, pathToFile2, ""),
+        assertEquals(Differ.generate(pathToFile1, pathToFile2, "stylish"),
                 "{\n"
                         + "  - calling-birds: [huey, dewey, louie, fred]\n"
                         + "    french-hens: 3\n"
