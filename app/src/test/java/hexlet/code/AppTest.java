@@ -190,7 +190,7 @@ class AppTest {
                         + "Property 'setting3' has not been changed. Value is 'true'\n");
     }
 
-    /*@Test
+    @Test
     void getDiffStyleJSON() throws IOException, Exception {
         init();
         currentAbsolutePath = currentAbsolutePath.substring(0, currentAbsolutePath.length() - 1);
@@ -236,5 +236,5 @@ class AppTest {
                         + "    \"setting2\": 300,\n"
                         + "    \"setting3\": \"none\"\n"
                         + "}");
-    }*/
+    }
 }

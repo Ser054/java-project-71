@@ -2,7 +2,7 @@ run-dist:
 	app/build/install/app/bin/app
 
 setup:
-	gradle wrapper --gradle-version 7.4.2
+	./gradlew wrapper --gradle-version 7.4.2
 
 run:
 	./gradlew run
